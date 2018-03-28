@@ -42,6 +42,8 @@
     "inferno": "^5.0.1",
     "inferno-server": "^5.0.1",
     "inferno-clone-vnode": "^5.0.1",
+    "inferno-create-element": "^5.0.1",
+    "inferno-vnode-flags": "^5.0.1",
     "superagent": "1.8.4"
   },
   "devDependencies": {
@@ -73,6 +75,8 @@
     "inferno": "^5.0.1",
     "inferno-server": "^5.0.1",
     "inferno-clone-vnode": "^5.0.1",
+    "inferno-create-element": "^5.0.1",
+    "inferno-vnode-flags": "^5.0.1",
     "react-server-gulp-module-tagger": "^0.6.0",
     "rimraf": "^2.5.4",
     "superagent": "^3.1.0"

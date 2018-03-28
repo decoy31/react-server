@@ -1,5 +1,7 @@
-var React = require('react');
-const PropTypes = require('prop-types');
+const { Component } = require('inferno');
+const { cloneElement } = require('inferno-clone-vnode');
+const { createElement } = require('inferno-create-element');
+const { VNodeFlags } = require('inferno-vnode-flags');
 var Q = require('q');
 
 const {isTheFold} = require('./TheFold');
@@ -10,11 +12,16 @@ const _ = {
 
 var logger = require('../logging').getLogger(__LOGGER__);
 
-class RootElement extends React.Component {
-	constructor(props) {
-		super(props);
+class RootElement extends Component {
+	constructor({
+		listen, // function
+		when, // promise
+		childProps, // object
+		_isRootElement, // boolean
+	}) {
+		super({listen, when, childProps, _isRootElement});
 		this.state = {
-			childProps: props.childProps,
+			childProps: childProps,
 		};
 	}
 
@@ -78,31 +85,34 @@ class RootElement extends React.Component {
 			return <div />;
 		}
 
-		return React.cloneElement(
-			React.Children.only(this.props.children),
+		if (Array.toArray(this.props.children).length !== 1) {
+			logger.error('Root element expects only one child element');
+			return <div />;
+		}
+
+		return cloneElement(
+			this.props.children,
 			this.state.childProps
 		);
 	}
 
 	getChildName() {
-		if (!this._childName){
-			this._childName = (React.Children.only(
-				this.props.children
-			).type.displayName||'Unknown').split('.').pop();
+		if (!this._childName) {
+			const children = Array.toArray(this.props.children);
+
+			this._childName = (
+				children.length === 1
+					? children[0].type.displayName
+					: 'Unknown'
+			).split('.').pop();
 		}
+
 		return this._childName;
 	}
 
 }
 
 module.exports = RootElement;
-
-RootElement.propTypes = {
-	listen: PropTypes.func,
-	when: PropTypes.object, // A promise.
-	childProps: PropTypes.object,
-	_isRootElement: PropTypes.bool,
-}
 
 RootElement.defaultProps = {
 	_isRootElement: true,
@@ -128,7 +138,6 @@ RootElement.getRootElementAttributes = function(element) {
 }
 
 RootElement.ensureRootElementWithContainer = function(element, container) {
-
 	// If it's _already_ a root element (or the fold), pass it along.
 	if (RootElement.isRootElement(element) || isTheFold(element) || (
 
@@ -137,7 +146,7 @@ RootElement.ensureRootElementWithContainer = function(element, container) {
 		// We exclude strings here since we already gripe about them
 		// at render time.
 		//
-		!React.isValidElement(element) && typeof element !== 'string'
+		(element && typeof element !== 'string' && (element.flags && (VNodeFlags.Component || VNodeFlags.Element)) > 0)
 	)){
 		return element;
 	}
@@ -166,7 +175,7 @@ RootElement.installListener = function(element, listen) {
 			// The promise itself will only resolve once, but we don't
 			// want to _clone_ multiple times.
 			else if (dfd.promise.isPending()) {
-				dfd.resolve(React.cloneElement(element, {
+				dfd.resolve(cloneElement(element, {
 					childProps,
 					subscribe,
 					unsubscribe,
@@ -203,9 +212,9 @@ RootElement.scheduleRender = function(element) {
 				// if we have a component loader specified, copy the resolved component
 				// and render that with the current child as a child of that component
 				const currentChild = rendered.props.children;
-				const childToRender = componentLoaderDeferred ? React.createElement(loadedComponent.value, null, currentChild) : currentChild;
+				const childToRender = componentLoaderDeferred ? createElement(loadedComponent.value, null, currentChild) : currentChild;
 
-				return React.cloneElement(rendered, {childProps: clonedChildProps}, childToRender);
+				return cloneElement(rendered, {childProps: clonedChildProps}, childToRender);
 			}
 			return rendered;
 		});
