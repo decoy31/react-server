@@ -1,23 +1,11 @@
 
-var React = require('react'),
-	PropTypes = require('prop-types'),
+var { Component } = require('inferno'),
 	navigateTo = require("../util/navigateTo");
 
-class Link extends React.Component {
+class Link extends Component {
 
 	static get displayName() {
 		return 'Link';
-	}
-
-	static get propTypes() {
-		return {
-			path       : PropTypes.string,
-			href       : PropTypes.string,
-			onClick    : PropTypes.func,
-			bundleData : PropTypes.bool,
-			reuseDom   : PropTypes.bool,
-			className  : PropTypes.string,
-		};
 	}
 
 	static get defaultProps() {
@@ -27,8 +15,15 @@ class Link extends React.Component {
 		};
 	}
 
-	constructor(props) {
-		super(props);
+	constructor({
+		path,
+		href,
+		onClick,
+		bundleData,
+		reuseDom,
+		className,
+	}) {
+		super({ path, href, onClick, bundleData, reuseDom, className });
 
 		this._onClick = this._onClick.bind(this);
 	}
