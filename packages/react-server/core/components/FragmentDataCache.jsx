@@ -1,7 +1,6 @@
 
 var ReactServerAgent = require("../ReactServerAgent"),
-	React = require('react'),
-	PropTypes = require('prop-types');
+	{ Component } = require('inferno');
 
 /**
  * FragmentDataCache writes out a serialized form of the ReactServerAgent request
@@ -37,16 +36,10 @@ var ReactServerAgent = require("../ReactServerAgent"),
  * 	* entry.res and entry.err.response won't have any `body` entry if
  *	  the response from the server was HTML instead of JSON.
  */
-class FragmentDataCache extends React.Component {
+class FragmentDataCache extends Component {
 
 	static get displayName() {
 		return 'FragmentDataCache';
-	}
-
-	static get propTypes() {
-		return {
-			cacheNodeId: PropTypes.string,
-		};
 	}
 
 	static get defaultProps() {
