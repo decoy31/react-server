@@ -1,6 +1,5 @@
 
 var logger = require('./logging').getLogger(__LOGGER__),
-	Inferno = require('inferno'),
 	InfernoServer = require('inferno-server'),
 	cloneElement = require('inferno-clone-vnode').cloneElement,
 	MobileDetect = require('mobile-detect'),
