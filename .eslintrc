@@ -17,10 +17,11 @@
     "jasmine": true
   },
   "plugins": [
-    "react"
+    "inferno"
   ],
   "rules": {
-    "react/jsx-uses-vars": 2,
+    "inferno/jsx-uses-inferno": 2,
+    "inferno/jsx-uses-vars": 2,
     "camelcase": 0,
     "comma-dangle": [
       2,
@@ -97,7 +98,6 @@
       0,
       "double"
     ],
-    "react/jsx-uses-react": 2,
     "semi": [
       0,
       "always"
