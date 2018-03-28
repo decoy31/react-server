@@ -1,7 +1,7 @@
 
 var logger = require('./logging').getLogger(__LOGGER__),
 	InfernoServer = require('inferno-server'),
-	cloneElement = require('inferno-clone-vnode').cloneElement,
+	{ cloneElement } = require('inferno-clone-vnode'),
 	MobileDetect = require('mobile-detect'),
 	RequestContext = require('./context/RequestContext'),
 	RequestLocalStorage = require('./util/RequestLocalStorage'),
