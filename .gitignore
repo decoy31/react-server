@@ -6,3 +6,4 @@ node_modules
 asini-debug.log
 *npm-debug.log*
 .DS_Store
+package-lock.json
