@@ -1,6 +1,6 @@
 
-var React = require('react'),
-	ReactDOM = require('react-dom'),
+var Inferno = require('inferno'),
+	{ cloneElement } = require('inferno-clone-vnode'),
 	logging = require('./logging'),
 	RequestContext = require('./context/RequestContext'),
 	RequestLocalStorage = require('./util/RequestLocalStorage'),
@@ -25,7 +25,7 @@ var RLS = RequestLocalStorage.getNamespace();
 var logger = logging.getLogger(__LOGGER__);
 
 // for dev tools
-window.React = React;
+window.Inferno = Inferno;
 
 var REACT_SERVER_DATA_ATTRIBUTE = "data-react-server-root-id";
 
@@ -442,13 +442,13 @@ class ClientController extends EventEmitter {
 		var t0 = new Date;
 		var retval = Q.defer();
 
-		logger.debug('React Rendering');
+		logger.debug('Inferno Rendering');
 
 		// We keep track of the _total_ time we spent rendering during
 		// each request so we can keep track of that overhead.
 		var totalRenderTime = 0;
 
-		// These resolve with React elements when their data
+		// These resolve with Inferno elements when their data
 		// dependencies are fulfilled.
 		var elementPromises = PageUtil.standardizeElements(page.getElements());
 		var timeoutDfd = [];
@@ -584,8 +584,8 @@ class ClientController extends EventEmitter {
 			var name  = PageUtil.getElementDisplayName(element)
 			,   timer = logger.timer(`renderElement.individual.${name}`)
 
-			element = React.cloneElement(element, { context: this.context });
-			var renderFunc = ReactDOM.hydrate || ReactDOM.render;
+			element = cloneElement(element, { context: this.context });
+			var renderFunc = Inferno.hydrate || Inferno.render;
 			renderFunc(element, root);
 
 			_.forEach(
@@ -671,7 +671,7 @@ class ClientController extends EventEmitter {
 	}
 
 	/**
-	 * Cleans up a previous React render in the document. Unmounts all the components and destoys the mounting
+	 * Cleans up a previous Inferno render in the document. Unmounts all the components and destoys the mounting
 	 * DOM node(s) that were created.
 	 */
 	_cleanupPreviousRender(index) {
@@ -683,7 +683,7 @@ class ClientController extends EventEmitter {
 			// Only need to do this once per request.
 			RLS().haveCleanedPreviousRender = true;
 
-			logger.debug("Removing previous page's React components");
+			logger.debug("Removing previous page's Inferno components");
 
 			[].slice.call(
 				document.querySelectorAll(`div[${REACT_SERVER_DATA_ATTRIBUTE}]`)
@@ -692,9 +692,9 @@ class ClientController extends EventEmitter {
 					// Since this node has a "data-react-server-root-id"
 					// attribute, we can assume that we created it
 					// and should destroy it. Destruction means
-					// first unmounting from React and then
+					// first unmounting from Inferno and then
 					// destroying the DOM node.
-					ReactDOM.unmountComponentAtNode(root);
+					Inferno.unmount(root);
 					root.parentNode.removeChild(root);
 				}
 			});
