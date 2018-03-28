@@ -1,4 +1,4 @@
-import {Component} from "react";
+import { Component } from "inferno";
 
 export default class TheFold extends Component {
 	render() {
