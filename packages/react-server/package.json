@@ -53,7 +53,7 @@
     "benchmark": "^2.1.4",
     "cheerio": "^0.22.0",
     "eslint": "^3.8.1",
-    "eslint-plugin-inferno-app": "^6.4.1",
+    "eslint-plugin-inferno": "^7.7.0",
     "express": "^4.14.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
