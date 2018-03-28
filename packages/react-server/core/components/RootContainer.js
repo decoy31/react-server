@@ -1,23 +1,16 @@
-var PropTypes = require('prop-types');
-var React = require('react');
+var { Component } = require('inferno');
 var {
 	ensureRootElementWithContainer,
 	getRootElementAttributes,
 } = require('./RootElement');
 
-class RootContainer extends React.Component {
+class RootContainer extends Component {
 	render() {
 		throw new Error("RootContainers can't go in non-RootContainers!");
 	}
 }
 
 module.exports = RootContainer;
-
-RootContainer.propTypes = {
-	listen: PropTypes.func,
-	when: PropTypes.object, // A promise.
-	_isRootContainer: PropTypes.bool,
-}
 
 RootContainer.defaultProps = {
 	_isRootContainer: true,
@@ -35,7 +28,7 @@ RootContainer.isRootContainer = function(element) {
 }
 
 function prepChildren (element) {
-	return React.Children.toArray(element.props.children).map(
+	return Array.toArray(element.props.children).map(
 		child => RootContainer.isRootContainer(child)
 			?RootContainer.flattenForRender(child)
 			:ensureRootElementWithContainer(child, element)
