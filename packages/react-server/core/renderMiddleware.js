@@ -1,7 +1,8 @@
 
 var logger = require('./logging').getLogger(__LOGGER__),
-	React = require('react'),
-	ReactDOMServer = require('react-dom/server'),
+	Inferno = require('inferno'),
+	InfernoServer = require('inferno-server'),
+	cloneElement = require('inferno-clone-vnode').cloneElement,
 	MobileDetect = require('mobile-detect'),
 	RequestContext = require('./context/RequestContext'),
 	RequestLocalStorage = require('./util/RequestLocalStorage'),
@@ -823,8 +824,8 @@ function renderElement(res, element, context) {
 
 	try {
 		if (element !== null) {
-			html = ReactDOMServer.renderToString(
-				React.cloneElement(element, { context: context })
+			html = InfernoServer.renderToString(
+				cloneElement(element, { context: context })
 			);
 			attrs = getRootElementAttributes(element);
 		}
