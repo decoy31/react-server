@@ -1,6 +1,13 @@
 {
   "plugins": [
-    "react-require"
+  	"react-require",
+  	["module-resolver", {
+		"alias": {
+			"react": "inferno-compat",
+			"react-dom/server": "inferno-server",
+			"react-dom": "inferno-compat",
+		}
+	}]
   ],
   "presets": ["es2015", "react"]
 }

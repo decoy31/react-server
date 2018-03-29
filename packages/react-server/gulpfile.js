@@ -1,4 +1,5 @@
 var gulp = require("gulp"),
+	babel = require('gulp-babel'),
 	path = require('path'),
 	nsp = require('gulp-nsp'),
 	replace = require("gulp-replace"),
@@ -59,6 +60,7 @@ function compile(serverSide) {
 			.pipe(replace("SERVER_SIDE", serverSide ? "true" : "false"))
 			.pipe(gulpif(shouldSourcemap(), sourcemaps.init()))
 			.pipe(common.es6Transform())
+			.pipe(babel())
 			.pipe(gulpif(shouldSourcemap(), sourcemaps.write()))
 			.pipe(rename(function (path) {
 				path.extname = ".js";
