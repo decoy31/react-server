@@ -1,4 +1,4 @@
-import React from "react";
+import { Component } from "inferno";
 import DataBundleCache from "react-server-data-bundle-cache";
 import {
 	Link,
@@ -23,7 +23,7 @@ const LINK = page => `${BASE}?page=${page}`
 
 const BundleLink = ({row}) => <Link bundleData={true} reuseDom={true} path={LINK(row)}>Go</Link>
 
-class PreloadLink extends React.Component {
+class PreloadLink extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
@@ -46,7 +46,7 @@ class PreloadLink extends React.Component {
 
 let _cacheEnabled = false;
 
-class CacheToggle extends React.Component {
+class CacheToggle extends Component {
 	_toggle() {
 		this.setState({on: _cacheEnabled = !_cacheEnabled});
 	}

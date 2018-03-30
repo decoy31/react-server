@@ -1,6 +1,6 @@
 
 var Inferno = require('inferno'),
-	{ cloneElement } = require('inferno-clone-vnode'),
+	{ cloneVNode } = require('inferno-clone-vnode'),
 	logging = require('./logging'),
 	RequestContext = require('./context/RequestContext'),
 	RequestLocalStorage = require('./util/RequestLocalStorage'),
@@ -584,7 +584,7 @@ class ClientController extends EventEmitter {
 			var name  = PageUtil.getElementDisplayName(element)
 			,   timer = logger.timer(`renderElement.individual.${name}`)
 
-			element = cloneElement(element, { context: this.context });
+			element = cloneVNode(element, { context: this.context });
 			var renderFunc = Inferno.hydrate || Inferno.render;
 			renderFunc(element, root);
 

@@ -28,7 +28,8 @@ RootContainer.isRootContainer = function(element) {
 }
 
 function prepChildren (element) {
-	return Array.toArray(element.props.children).map(
+	const children = [...element.props.children];
+	return children.map(
 		child => RootContainer.isRootContainer(child)
 			?RootContainer.flattenForRender(child)
 			:ensureRootElementWithContainer(child, element)

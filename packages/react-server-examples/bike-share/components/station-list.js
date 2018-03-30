@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import Inferno from 'inferno';
 import {logging} from 'react-server';
 import StationCard from './station-card';
 
@@ -9,10 +8,6 @@ const StationList = ({stations}) => {
 	logger.info(`rendering list of ${stations.length} stations`);
 	const stationCards = stations.map(station => <StationCard station={station} key={station.id}/>);
 	return <div>{stationCards}</div>;
-};
-
-StationList.propTypes = {
-	stations: PropTypes.array,
 };
 
 StationList.displayName = 'StationList';

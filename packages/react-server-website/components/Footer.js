@@ -1,9 +1,9 @@
-import React from 'react';
+import { Component } from 'inferno';
 import wireUpGitHubButton from '../lib/github-button';
 import wireUpSlackinButton from '../lib/slackin-button';
 import './Footer.less';
 
-export default class Footer extends React.Component {
+export default class Footer extends Component {
 	render() {
 		return (
 			<footer>

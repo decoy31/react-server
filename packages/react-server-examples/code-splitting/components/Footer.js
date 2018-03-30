@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import Inferno, { Component } from 'inferno';
 import {logging} from 'react-server';
 
 const logger = logging.getLogger(__LOGGER__);

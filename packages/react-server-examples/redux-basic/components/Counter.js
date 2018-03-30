@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import Inferno, { Component } from 'inferno';
 import { connect } from 'react-redux'
 
 class Counter extends Component {

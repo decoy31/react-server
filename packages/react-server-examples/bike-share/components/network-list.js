@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import Inferno from 'inferno';
 import {logging} from 'react-server';
 import NetworkCard from './network-card';
 
@@ -11,10 +10,6 @@ const NetworkList = ({networks}) => {
 		return <NetworkCard key={network.id} {...network}/>;
 	});
 	return <div>{networkCards}</div>;
-};
-
-NetworkList.propTypes = {
-	networks: PropTypes.array,
 };
 
 NetworkList.displayName = 'NetworkList';

@@ -1,9 +1,9 @@
-const PropTypes = require('prop-types');
-var React = require('react');
-var { Provider } = require('react-redux');
+import { Component } from 'inferno';
+import { createElement } from 'inferno-create-element';
+var { Provider } = require('inferno-redux');
 
 const rootProviderSymbol = Symbol();
-class RootProvider extends React.Component {
+class RootProvider extends Component {
 	constructor() {
 		super();
 		this[rootProviderSymbol] = true;
@@ -22,19 +22,15 @@ class RootProvider extends React.Component {
 		if (Array.isArray(this.props.children)) {
 			this.props.children.forEach((element, index) => {
 				if (!RootProvider.isRootProvider(element)) {
-					wrappedElements.push(React.createElement(Provider, {key: index, store: this.props.store}, element));
+					wrappedElements.push(createElement(Provider, {key: index, store: this.props.store}, element));
 				}
 			});
 		} else {
-			wrappedElements.push(React.createElement(Provider, {key: 0, store: this.props.store}, this.props.children));
+			wrappedElements.push(createElement(Provider, {key: 0, store: this.props.store}, this.props.children));
 		}
 
-		return React.createElement('div', null, wrappedElements);
+		return createElement('div', null, wrappedElements);
 	}
 }
 
 module.exports = RootProvider;
-
-RootProvider.propTypes = {
-	store: PropTypes.object.isRequired,
-}

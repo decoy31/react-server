@@ -1,4 +1,4 @@
-import React from 'react';
+import Inferno from 'inferno';
 import {RootElement} from 'react-server';
 
 import Header from '../components/header';

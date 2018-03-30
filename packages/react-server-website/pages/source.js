@@ -1,4 +1,3 @@
-import React from 'react';
 import {ReactServerAgent, RootContainer} from 'react-server';
 import SourceBody from '../components/source-body';
 import PageTitle from '../components/page-title';

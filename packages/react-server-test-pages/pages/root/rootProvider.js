@@ -1,15 +1,15 @@
 import {RootElement} from "react-server";
 import {RootProvider} from "react-server-redux";
 import {createStore} from "redux";
-import { connect } from 'react-redux';
+import { connect } from 'inferno-redux';
 import PropTypes from 'prop-types';
-import React from 'react';
+import { Component } from 'inferno';
 
 function simpleReducer(state = {simpleValue: "Hello"}) {
 	return state;
 }
 
-class BasicComponent extends React.Component {
+class BasicComponent extends Component {
 	render() {
 		return (<div>{this.props.simpleValue}</div>)
 	}

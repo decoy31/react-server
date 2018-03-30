@@ -1,7 +1,7 @@
 
 var logger = require('./logging').getLogger(__LOGGER__),
 	InfernoServer = require('inferno-server'),
-	{ cloneElement } = require('inferno-clone-vnode'),
+	{ cloneVNode } = require('inferno-clone-vnode'),
 	MobileDetect = require('mobile-detect'),
 	RequestContext = require('./context/RequestContext'),
 	RequestLocalStorage = require('./util/RequestLocalStorage'),
@@ -661,9 +661,10 @@ function startBody(req, res, context, start, page) {
  * all the ReactElements have been written out.
  */
 function writeBody(req, res, context, start, page) {
+	const getElementsResult = page.getElements();
 
 	// standardize to an array of EarlyPromises of ReactElements
-	var elementPromises = PageUtil.standardizeElements(page.getElements());
+	var elementPromises = PageUtil.standardizeElements(getElementsResult);
 
 	// This is where we'll store our rendered HTML strings.  A value of
 	// `undefined` means we haven't rendered that element yet.
@@ -676,7 +677,6 @@ function writeBody(req, res, context, start, page) {
 	var dfds = elementPromises.map(() => Q.defer());
 
 	var doElement = (element, index) => {
-
 		// Exceeded `FAILSAFE_RENDER_TIMEOUT`.  Bummer.
 		if (rendered[index] === ELEMENT_ALREADY_WRITTEN) return;
 
@@ -808,7 +808,6 @@ function writeDataBundle(req, res) {
 }
 
 function renderElement(res, element, context) {
-
 	if (element.containerOpen || element.containerClose || element.isTheFold){
 
 		// Short-circuit out.  Don't want timing for control objects.
@@ -824,7 +823,7 @@ function renderElement(res, element, context) {
 	try {
 		if (element !== null) {
 			html = InfernoServer.renderToString(
-				cloneElement(element, { context: context })
+				cloneVNode(element, { context: context })
 			);
 			attrs = getRootElementAttributes(element);
 		}

@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'inferno';
 import {Link, getCurrentRequestContext} from "react-server";
 
 import SvgLogo from './assets/SvgLogo';
@@ -42,7 +42,7 @@ const HeaderLink = ({label, path, internal}) => {
 	}
 }
 
-class MenuControl extends React.Component {
+class MenuControl extends Component {
 	render() {
 		let controlContent = (<span>Menu <SvgHambut /></span>)
 
@@ -55,7 +55,7 @@ class MenuControl extends React.Component {
 }
 
 
-export default class Header extends React.Component {
+export default class Header extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {

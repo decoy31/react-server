@@ -1,5 +1,5 @@
 const { Component } = require('inferno');
-const { cloneElement } = require('inferno-clone-vnode');
+const { cloneVNode } = require('inferno-clone-vnode');
 const { createElement } = require('inferno-create-element');
 const { VNodeFlags } = require('inferno-vnode-flags');
 var Q = require('q');
@@ -13,15 +13,10 @@ const _ = {
 var logger = require('../logging').getLogger(__LOGGER__);
 
 class RootElement extends Component {
-	constructor({
-		listen, // function
-		when, // promise
-		childProps, // object
-		_isRootElement, // boolean
-	}) {
-		super({listen, when, childProps, _isRootElement});
+	constructor(props) {
+		super(props);
 		this.state = {
-			childProps: childProps,
+			childProps: props.childProps,
 		};
 	}
 
@@ -74,6 +69,12 @@ class RootElement extends Component {
 			this._changeCount = 0;
 		}
 
+		//logger.debug('RootElement.children =', this.children);
+
+		if (this.props.children == null) {
+			return null;
+		}
+
 		if (typeof this.props.children === 'string') {
 
 			logger.error(
@@ -81,16 +82,23 @@ class RootElement extends Component {
 				{ text: this.props.children }
 			);
 
-			// Don't keep choking on it.  Just gut it.
+			// Don't keep choking on it. Just gut it.
 			return <div />;
 		}
 
-		if (Array.toArray(this.props.children).length !== 1) {
-			logger.error('Root element expects only one child element');
-			return <div />;
+		if (Array.isArray(this.props.children)) {
+			if (this.props.children.length !== 1) {
+				logger.error('Root element expects only one child element');
+				return <div />;
+			}
+
+			return cloneVNode(
+				this.props.children[0],
+				this.state.childProps
+			);
 		}
 
-		return cloneElement(
+		return cloneVNode(
 			this.props.children,
 			this.state.childProps
 		);
@@ -98,7 +106,7 @@ class RootElement extends Component {
 
 	getChildName() {
 		if (!this._childName) {
-			const children = Array.toArray(this.props.children);
+			const children = [...this.props.children];
 
 			this._childName = (
 				children.length === 1
@@ -146,7 +154,7 @@ RootElement.ensureRootElementWithContainer = function(element, container) {
 		// We exclude strings here since we already gripe about them
 		// at render time.
 		//
-		(element && typeof element !== 'string' && (element.flags && (VNodeFlags.Component || VNodeFlags.Element)) > 0)
+		(!element || (typeof element !== 'string' && !(element.flags & (VNodeFlags.Component | VNodeFlags.Element)) > 0))
 	)){
 		return element;
 	}
@@ -175,7 +183,7 @@ RootElement.installListener = function(element, listen) {
 			// The promise itself will only resolve once, but we don't
 			// want to _clone_ multiple times.
 			else if (dfd.promise.isPending()) {
-				dfd.resolve(cloneElement(element, {
+				dfd.resolve(cloneVNode(element, {
 					childProps,
 					subscribe,
 					unsubscribe,
@@ -214,7 +222,7 @@ RootElement.scheduleRender = function(element) {
 				const currentChild = rendered.props.children;
 				const childToRender = componentLoaderDeferred ? createElement(loadedComponent.value, null, currentChild) : currentChild;
 
-				return cloneElement(rendered, {childProps: clonedChildProps}, childToRender);
+				return cloneVNode(rendered, {childProps: clonedChildProps}, childToRender);
 			}
 			return rendered;
 		});

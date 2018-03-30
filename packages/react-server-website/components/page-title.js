@@ -1,17 +1,7 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { Component } from 'react';
+import { Component } from 'inferno';
 import './page-title.less';
 
 export default class PageTitle extends Component {
-	static getPropTypes() {
-		return {
-			viewSourceUrl: PropTypes.string,
-			serverVersion: PropTypes.string,
-			titleProvider: PropTypes.object,
-		};
-	}
-
 	render() {
 		let ctas;
 

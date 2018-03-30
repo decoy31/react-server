@@ -1,9 +1,9 @@
-import React from 'react';
+import { Component } from 'inferno';
 import {logging} from 'react-server';
 
 const logger = logging.getLogger(__LOGGER__);
 
-export default class HelloWorld extends React.Component {
+export default class HelloWorld extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {exclamationCount: 0};

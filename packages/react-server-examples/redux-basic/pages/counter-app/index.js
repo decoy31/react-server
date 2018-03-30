@@ -1,8 +1,8 @@
-import React from 'react'
-import { RootElement } from 'react-server'
-import { RootProvider } from 'react-server-redux'
-import Counter from '../../components/Counter'
-import store from '../store'
+import Inferno from 'inferno';
+import { RootElement } from 'react-server';
+import { RootProvider } from 'react-server-redux';
+import Counter from '../../components/Counter';
+import store from '../store';
 
 export default class CounterPage {
 	getElements() {

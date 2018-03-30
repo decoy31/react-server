@@ -1,5 +1,5 @@
 import Q from 'q';
-import { Component } from 'react';
+import { Component } from 'inferno';
 import { RootElement } from 'react-server';
 
 class RenderError extends Component {

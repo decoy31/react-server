@@ -1,4 +1,3 @@
-import React from 'react';
 import HomepageBody from '../components/homepage-body';
 import './homepage.less';
 

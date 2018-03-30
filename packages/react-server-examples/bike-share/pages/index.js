@@ -1,4 +1,4 @@
-import React from 'react';
+import Inferno from 'inferno';
 import {ReactServerAgent, RootElement, TheFold, logging} from 'react-server';
 import NetworkList from '../components/network-list';
 import Header from '../components/header';

@@ -1,5 +1,5 @@
 import _ from "lodash";
-import {Component} from "react";
+import {Component} from "Inferno";
 import {ReactServerAgent} from "react-server";
 
 // Each row listens to `navigateStart'.

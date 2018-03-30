@@ -436,7 +436,7 @@ var PageUtil = {
 			// has only a single child, we'll look at the child to
 			// see if it has a nice name.  This helps bypass
 			// anonymous wrapper elements.
-			if (Array.toArray(children).length === 1) {
+			if (Array.isArray(children) && children.length === 1) {
 				name = PageUtil.getElementDisplayName(children);
 			}
 		}

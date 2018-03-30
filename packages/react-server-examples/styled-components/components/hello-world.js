@@ -1,4 +1,4 @@
-import React from 'react';
+import Inferno, { Component } from 'inferno';
 import {logging} from 'react-server';
 import {ThemeProvider} from 'styled-components';
 
@@ -10,7 +10,7 @@ import {ladbrokes, oddButTrendy} from './themes';
 
 const logger = logging.getLogger(__LOGGER__);
 
-export default class HelloWorld extends React.Component {
+export default class HelloWorld extends Component {
 	constructor(props) {
 		super(props);
 

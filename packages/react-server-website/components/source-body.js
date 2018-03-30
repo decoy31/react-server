@@ -1,4 +1,3 @@
-import React from 'react';
 import Markdown from "./Markdown";
 import SourceIntro from "./source-intro.md";
 import './source-body.less';

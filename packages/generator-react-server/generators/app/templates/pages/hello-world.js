@@ -1,4 +1,4 @@
-import React from 'react';
+import Inferno from 'inferno';
 import HelloWorld from '../components/hello-world';
 
 export default class SimplePage {

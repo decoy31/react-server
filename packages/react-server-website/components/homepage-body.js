@@ -1,5 +1,4 @@
-import React from 'react';
-// import {Component} from 'react';
+import { Component } from 'inferno';
 import Markdown from './Markdown';
 import GetStartedSection from './content/HomeGetStartedSection.md';
 import WhySection from './content/HomeWhySection.md';
@@ -23,7 +22,7 @@ const HeroSection = () => (
 	</section>
 )
 
-export default class HomepageBody extends React.Component {
+export default class HomepageBody extends Component {
 	render() {
 		return (
 			<div className="HomepageContent">

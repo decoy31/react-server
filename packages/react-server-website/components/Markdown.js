@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import { Component } from 'inferno';
 
 import Remarkable from 'remarkable';
 import hljs from '../lib/highlight.js';
@@ -10,7 +10,7 @@ import './Markdown.less';
 
 const logger = logging.getLogger(__LOGGER__);
 
-export default class Markdown extends React.Component {
+export default class Markdown extends Component {
 	render() {
 		let content = this.props.children || this.props.source;
 

@@ -1,7 +1,6 @@
 import {createStore, applyMiddleware} from "redux";
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { Component } from 'inferno';
+import { connect } from 'inferno-redux';
 import {RootElement} from "react-server";
 import {RootProvider, ReduxAdapter} from "react-server-redux";
 import ReduxThunk from "redux-thunk";
@@ -33,11 +32,7 @@ function initAction() {
 	}
 }
 
-class BasicComponent extends React.Component {
-	propTypes: {
-		elementData: PropTypes.sting.isRequired,
-	}
-
+class BasicComponent extends Component {
 	render() {
 		return (<div>{this.props.elementData}</div>)
 	}
