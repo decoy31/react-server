@@ -69,6 +69,14 @@ module.exports = {
 		entry: "/bottleneck/elements",
 		description: "Test if number of elements on a page is a bottleneck",
 	},
+	// BottleneckNestedElementsBreadth: {
+	// 	entry: "/bottleneck/nestedElements",
+	// 	description: "Test if number of nested elements on a page is a bottleneck",
+	// },
+	BottleneckNestedElementsDepth: {
+		entry: "/bottleneck/nestedElementsDepth",
+		description: "Test if number of deeply nested elements on a page is a bottleneck",
+	},
 	BottleneckDataRequests: {
 		entry: "/bottleneck/dataRequests",
 		description: "Test if number of data requests on a page is a bottleneck",
