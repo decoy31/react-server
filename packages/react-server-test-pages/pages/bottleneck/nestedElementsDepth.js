@@ -30,7 +30,7 @@ export default class ElementsPage {
 		let height = 2;
 		let parent = RedThing({ children: ' ', style: { width: `${width}px`, height: `${height}px` } });
 
-		for (var i = 0; i < 100; i++) {
+		for (var i = 0; i < 2000; i++) {
 			width += 2;
 			height += 2;
 			parent = ColorWheel[i%7]({children: parent, style: { width: `${width}px`, height: `${height}px` }});
