@@ -1,0 +1,13 @@
+#content {
+	font-size: 1px;
+
+	& > div {
+		display: inline-block;
+	}
+}
+
+.thing {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+}

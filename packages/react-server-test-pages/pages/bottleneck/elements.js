@@ -1,3 +1,4 @@
+import "./elements.scss";
 import "./colors/red.scss";
 import "./colors/blue.scss";
 import "./colors/purple.scss";
@@ -6,16 +7,15 @@ import "./colors/orange.scss";
 import "./colors/indigo.scss";
 import "./colors/yellow.scss";
 
-const RedThing = () => <div className="red-thing">This should be red</div>;
-const BlueThing = () => <div className="blue-thing">This should be blue</div>;
-const PurpleThing = () => <div className="purple-thing">This should be purple</div>;
-const GreenThing = () => <div className="green-thing">This should be green</div>;
-const OrangeThing = () => <div className="orange-thing">This should be orange</div>;
-const IndigoThing = () => <div className="indigo-thing">This should be indigo</div>;
-const YellowThing = () => <div className="yellow-thing">This should be yellow</div>;
+const RedThing = () => <div className="thing red-thing"> </div>;
+const BlueThing = () => <div className="thing blue-thing"> </div>;
+const PurpleThing = () => <div className="thing purple-thing"> </div>;
+const GreenThing = () => <div className="thing green-thing"> </div>;
+const OrangeThing = () => <div className="thing orange-thing"> </div>;
+const IndigoThing = () => <div className="thing indigo-thing"> </div>;
+const YellowThing = () => <div className="thing yellow-thing"> </div>;
 const ColorWheel = [RedThing(), BlueThing(), PurpleThing(), GreenThing(),
 	OrangeThing(), IndigoThing(), YellowThing()];
-const ColorSize = ColorWheel.length;
 
 /**
 * This page is a smoke test to determine whether or not the number of elements in
@@ -29,9 +29,7 @@ export default class ElementsPage {
 
 		const colorThings = [];
 		for (var i = 0; i < 10000; i++) {
-			// Select a random element from the colors of the rainbow
-			let selection = Math.floor(Math.random() * ColorSize);
-			colorThings.push(ColorWheel[selection]);
+			colorThings.push(ColorWheel[i%7]);
 		};
 
 		return (colorThings);
