@@ -1,0 +1,15 @@
+#content {
+	font-size: 1px;
+
+	& > div {
+		display: inline-block;
+	}
+}
+
+.thing {
+	display: inline-block;
+	text-align: center;
+	margin-top: 1px;
+	width: 2px;
+	height: 2px;
+}
